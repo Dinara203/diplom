@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/adapt.css">
+    <script src="assets/js/burger.js" defer></script>
+    <script src="assets/js/modal.js" defer></script>
+    <title>Онлайн-галлерея современного искусства</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="logo"></a>
+                <ul class="menu-content">
+                    <li><a href="Catalog.html" class="menu">Картины</a></li>
+                    <li><a href="artists.html" class="menu">Художники</a></li>
+                    <li><a href="index.html#About" class="menu">О нас</a></li>
+                    <li><a href="index.html#Question" class="menu">Вопрос/ответ</a></li>
+                </ul>
+                
+                <div class="buttons">
+                    <a href="reg.html" class="btn-head">Регистрация</a>
+                    <a href="auth.html" class="btn-head">Авторизация</a>
+                </div>
+                <!-- <div class="buttons">
+                    <a href="korz.html" class="btn-head"><img src="assets/img/korz.png" alt="korz"></a>
+                    <a href="profile.html" class="btn-head"><img src="assets/img/iconuser.png" alt="profile"></a>
+                </div> -->
+                <!-- бургер -->
+              <div class="burger-menu">
+                <button class="burger-menu_button">
+                  <img src="assets/img/menu.png" alt="menu">
+                </button>
+                <nav class="burger-menu_nav">
+                  <button class="burger-menu_close">
+                    <img src="assets/img/close.png" alt="close">
+                  </button>
+                  <a href="Catalog.html" class="burger-menu_link">Картины</a>
+                  <a href="artists.html" class="burger-menu_link">Художники</a>
+                  <a href="" class="burger-menu_link">О нас</a>
+                  <a href="" class="burger-menu_link">Вопрос/ответ</a>
+                  <div class="buttons-burger">
+                    <a href="reg.html" class="btn-head">Регистрация</a>
+                    <a href="auth.html" class="btn-head">Авторизация</a>
+                    </div>
+                    <!-- <div class="buttons-burger">
+                        <a href="korz.html" class="btn-head"><img src="assets/img/korz.png" alt="korz"></a>
+                        <a href="profile.html" class="btn-head"><img src="assets/img/iconuser.png" alt="profile"></a>
+                    </div> -->
+                    
+                </nav>
+              </div>
+              <!-- бургер -->
+            </div>
+        </div>
+    </header>
+    <div class="line"></div>
+    <!-- МОДАЛЬНОЕ ОКНО ОФОРМЛЕНИЯ ЗАКАЗА -->
+   <div class="modal" data-modal="modal">
+    <div class="modal-form white-background">
+        <div class="wrapper modal-form__wrapper">
+            <p class="red f24px">Оформление заказа</p>
+            <button class="close-button">
+                <img src="assets/img/close-red.png" alt="close" class="close-button__img">
+            </button>
+            
+        </div>
+        
+        <form action="" method="POST" class="form-modal">
+            <div class="text-inp">
+                <p class="f14px red">Ваша почта, куда художник вам напишет на счет заказа в течении часа</p>
+                <input type="text" name="email" class="inp-black" value="user@mail.ru">
+            </div>
+            <input type="submit" class="btn-red" value="Оформить заказ">
+        </form>
+        
+        
+    </div>
+  </div>
+  <!-- МОДАЛЬНОЕ ОКНО ОФОРМЛЕНИЯ ЗАКАЗА -->
+    <main>
+        <section class="Korz">
+            <div class="container">
+                <div class="korz-content">
+                    <div class="title-line">
+                        <p class="title red"><span class="yellow-text">К</span>орзина</p>
+                        <div class="line-title-red"></div>
+                    </div>
+                    <div class="card-content">
+                        <a href="card.html">
+                            <div class="card">
+                                <img src="assets/img/card1.png" alt="" class="img-card">
+                                <p class="black">Задумчивая девушка,</p>
+                                <p class="red f16px">Художник: Сиразтдинова Динара</p>
+                                <p class="price red">5800 ₽</p>
+                            </div>
+                        </a>
+                        <a href="card.html">
+                            <div class="card">
+                                <img src="assets/img/card2.png" alt="" class="img-card">
+                                <p class="black">Задумчивая девушка,</p>
+                                <p class="red f16px">Художник: Сиразтдинова Динара</p>
+                                <p class="price red">5800 ₽</p>
+                            </div>
+                        </a>
+                        
+                    </div>
+                    <div class="button-card">
+                        <button class="btn-red pointer" id="btn-click">Оформить заказ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="line"></div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="logo"></a>
+                <ul class="menu-content">
+                    <li><a href="" class="menu">Картины</a></li>
+                    <li><a href="" class="menu">Художники</a></li>
+                    <li><a href="" class="menu">О нас</a></li>
+                    <li><a href="" class="menu">Вопрос/ответ</a></li>
+                </ul>
+               
+                <div class="text-footer">
+                    <p class="white">По всем вопросам:</p>
+                    <p class="white">“ArtGallery@mail.ru”</p>
+                    <p class="white">+7 (928)-238-81-82</p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
