@@ -43,7 +43,7 @@
                 $name=$_POST['name'];
                 $namesize=iconv_strlen($name);
 
-                if($namesize>7){
+                if($namesize>40){
                     $errorname='<p class="f14px red">Введите не больше 40 символов!</p>';
                 }else{
                     $name=$_POST['name'];

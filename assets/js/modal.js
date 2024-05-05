@@ -21,20 +21,23 @@ function addClassName(e, modal, className)  {
     modal.classList.add(className)
 }
 
+
 let modalDeleteBtn = document.querySelectorAll('.delete')
-let modalDelete = document.querySelector('[data-modal="delete"]')
-modalDeleteBtn.forEach(item=>{
+let modalDelete = document.querySelectorAll('[data-modal="delete"]')
+modalDeleteBtn.forEach((item,i)=>{
     item.addEventListener('click', (event) => {
-        addClassName(event, modalDelete, 'modal_active')
+        event.preventDefault()
+        modalDelete[i].classList.add('modal_active')
     })
 })
 
 
 let modalUpdateBtn = document.querySelectorAll('.update')
-let modalUpdate = document.querySelector('[data-modal="update"]')
+let modalUpdate = document.querySelectorAll('[data-modal="update"]')
 
-modalUpdateBtn.forEach(item=>{
+modalUpdateBtn.forEach((item,i)=>{
     item.addEventListener('click', (event) => {
-        addClassName(event, modalUpdate, 'modal_active')
+        event.preventDefault()
+        modalUpdate[i].classList.add('modal_active')
     })
 })

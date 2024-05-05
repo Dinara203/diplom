@@ -257,11 +257,13 @@
                         $picture=$res-> fetchAll();
 
                         foreach($picture as $pictures){
-                          
+                            
+
+                           
                             
                       ?>
                       <!-- МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ -->
-                      <div class="modal" data-modal="delete">
+                      <div class="modal" data-modal="delete" data-id="<?=$pictures['id']?>">
                             <div class="modal-form red-background">
                                 <div class="wrapper modal-form__wrapper">
                                     <p class="white">Вы точно хотите удалить картину "<?=$pictures['name']?>"?</p>
@@ -269,12 +271,129 @@
                                         <img src="assets/img/close-white.png" alt="close" class="close-button__img">
                                     </button>
                                 </div><br>
-                                                        
-                                <a href="profile.php?id=<?=$get_id?>&del_ok" id="" class="btn-head" >Удалить</a>
+                                                 
+                                <a href="profile.php?del_ok=<?=$pictures['id']?>" id="" class="btn-head" >Удалить</a>
+                                <?php
+                                     if(isset($_GET['del_ok'])){
+                                        $del_ok=$_GET['del_ok'];
+                                        $sql="DELETE FROM painting WHERE id= '$del_ok'";
+                                        $link->query($sql);
+        
+                                        
+                                        echo '<script>document.location.href="profile.php"</script>';
+                                    }
+                                ?>  
                             </div>
                         </div>
                         <!-- МОДАЛЬНОЕ ОКНО УДАЛЕНИЯ -->
+                         
+                         <!-- МОДАЛЬНОЕ РЕДАКТИРОВАНИЯ КАРТИНЫ -->
+                            <div class="modal" data-modal="update" data-id="<?=$pictures['id']?>">
+                                <div class="modal-form white-background">
+                                    <div class="wrapper-start ">
+                                        <form class="form-update" method="POST" enctype="multipart/form-data">
+                                            <div class="const-photo pointer">
+                                                <label for="files" id="btn-file" class="btn-photo pointer">
+                                                    
+                                                    <img src="<?=$pictures['photo']?>" alt="card" class="img-tov">
+                                                    
+                                                    <div class="relative">
+                                                        <img src="assets/img/photo-white.png" alt="photo">
+                                                        <p class="f14px white">Нажмите, чтобы добавить фото</p>
+                                                    </div>
+                                                </label>
 
+                                                <input id="files" accept="image/*" class="input-photo" type="file"  name="photo"/>
+                                            </div>
+                                            <div class="inp-form">
+                                                <input type="text" name="name" placeholder="Название картины*" class="inp-black" value="<?=$pictures['name']?>">
+                                                <div class="size">
+                                                    <input type="number" name="size1" placeholder="Ширина картины*" class="inp-black" value="<?=$pictures['size1']?>">
+                                                    <p>X</p>
+                                                    <input type="number" name="size2" placeholder="Высота картины*" class="inp-black" value="<?=$pictures['size2']?>">
+                                                    <p>см</p>
+                                                </div>
+                                                <div class="size">
+                                                    <select name="material" class="inp-black">
+                                                        <option value="0">Материал</option>
+                                                        <?php
+                                                            $sql="SELECT * FROM material";
+                                                            $res=$link->query($sql);
+                                                            $material=$res->fetchAll();
+
+                                                            foreach($material as $materials){?>
+                                                                <option value="<?=$materials['id']?>"<?=$pictures['id_material'] == $materials['id'] ? "selected" : ""?>><?=$materials['name']?></option>
+                                                            <?}
+                                                        ?>
+                                                    </select>
+                                                    <select name="view" class="inp-black">
+                                                        <option value="0">Вид</option>
+                                                        <?php
+                                                            $sql="SELECT * FROM view";
+                                                            $res=$link->query($sql);
+                                                            $view=$res->fetchAll();
+
+                                                            foreach($view as $views){?>
+                                                                <option value="<?=$views['id']?>"<?=$pictures['id_view'] == $views['id'] ? "selected" : ""?>><?=$views['name']?></option>
+                                                            <?}
+                                                        ?>
+                                                       
+                                                    </select>
+                                                </div>
+                                              
+                                                <div class="size">
+                                                    <input type="text" name="price" placeholder="Стоимость картины*" class="inp-black" value="<?=$pictures['price']?>">
+                                                    <p>₽</p>
+                                                </div>
+                                                <div class="button-card">
+                                                    <input type="submit" name="UpdateTov" class="btn-red pointer" value="Редактировать картину">
+                                                </div>
+                                            </div>
+                                            <?$pictures_id=$pictures['id'];
+                                               
+                                                if(isset($_POST['UpdateTov'])){
+                                                    
+                                                    $name= $_POST['name'];
+                                                    $price= $_POST['price'];
+                                                    $size1= $_POST['size1'];
+                                                    $size2= $_POST['size2'];
+                                                    $material= $_POST['material'];
+                                                    $view= $_POST['view'];
+                                                    
+
+                                                     if($_FILES['photo']['size']==0){
+                                                         $photo=$pictures['photo'];
+                                                     }else{
+                                                     $x = md5(time());
+                                                     $photo = 'assets/img/picture/'.$x.$_FILES['photo']['name'];
+                                                     move_uploaded_file($_FILES['photo']['tmp_name'], $photo);
+                                                     }
+                                                    
+                                     
+                                                     $sql="UPDATE painting SET
+                                                     photo ='$photo',
+                                                     name = '$name',
+                                                     price = '$price',
+                                                     size1 = '$size1',
+                                                     size2 = '$size2',
+                                                     id_material = '$material',
+                                                     id_view='$view'
+                                                     WHERE id = '$pictures_id'";
+                                                     $link -> query($sql);
+                                     
+                                                 echo "<script>document.location.href=\"profile.php\"</script>";
+                                                 }?>
+                                        </form>
+                                        <button class="close-button">
+                                            <img src="assets/img/close-red.png" alt="close" class="close-button__img">
+                                        </button>
+
+                                    </div>
+                                    
+                                
+                                </div>
+                            </div>
+                            <!-- МОДАЛЬНОЕ РЕДАКТИРОВАНИЯ КАРТИНЫ  -->
 
                      <div class="more-img ">
                         
@@ -291,10 +410,12 @@
                         <?}?>
                             <div class="buttons-up">
                                 <?if($pictures['id_status_painting']==1){?>
-                                <button class="update pointer" id="update"><img src="assets/img/update-tov.png" alt="update"></button>
+                                <button data-id="<?=$pictures['id']?>"  class="update pointer" id="update"><img src="assets/img/update-tov.png" alt="update"></button>
                                 <?}?>
-                                <button class="delete pointer" id="delete"><img src="assets/img/delete.png" alt="delete"></button>
+                                            
+                                <button data-id="<?=$pictures['id']?>" class="delete pointer" id="delete"><img src="assets/img/delete.png" alt="delete"></button>
                             </div>
+                            
                     </div>
                     <?}
                    
@@ -401,64 +522,7 @@
     
    
 
-  <!-- МОДАЛЬНОЕ РЕДАКТИРОВАНИЯ КАРТИНЫ -->
-  <div class="modal" data-modal="update">
-    <div class="modal-form white-background">
-        <div class="wrapper-start ">
-            <form action="" class="form-update" method="POST" enctype="multipart/form-data">
-                <div class="const-photo pointer">
-                    <label for="files" id="btn-file" class="btn-photo pointer">
-                        
-                        <img src="assets/img/card1.png" alt="card" class="img-tov">
-                        
-                        <div class="relative">
-                            <img src="assets/img/photo-white.png" alt="photo">
-                            <p class="f14px white">Нажмите, чтобы добавить фото</p>
-                        </div>
-                    </label>
-                    <input id="files" accept="image/*" class="input-photo" type="file"  name="photo"/>
-                </div>
-                <div class="inp-form">
-                    <input type="text" name="name" placeholder="Название картины*" class="inp-black" value="">
-                    <div class="size">
-                        <input type="number" name="size1" placeholder="Ширина картины*" class="inp-black" value="">
-                        <p>X</p>
-                        <input type="number" name="size2" placeholder="Высота картины*" class="inp-black" value="">
-                        <p>см</p>
-                    </div>
-                    <div class="size">
-                        <select name="material" class="inp-black">
-                            <option value="0">Материал</option>
-                            <option value="1">Карандаш</option>
-                            <option value="2">Акрил</option>
-                            <option value="3">Акварель</option>
-                        </select>
-                        <select name="view" class="inp-black">
-                            <option value="0">Вид</option>
-                            <option value="1">Портрет</option>
-                            <option value="2">Натюрморт</option>
-                            <option value="3">Пейзаж</option>
-                        </select>
-                    </div>
-                    <div class="size">
-                        <input type="text" name="price" placeholder="Стоимость картины*" class="inp-black" value="">
-                        <p>₽</p>
-                    </div>
-                    <div class="button-card">
-                        <input type="submit" name="Add" class="btn-red pointer" value="Редактировать картину">
-                    </div>
-                </div>
-            </form>
-            <button class="close-button">
-                <img src="assets/img/close-red.png" alt="close" class="close-button__img">
-            </button>
-
-        </div>
-        
-       
-    </div>
-  </div>
-  <!-- МОДАЛЬНОЕ РЕДАКТИРОВАНИЯ КАРТИНЫ  -->
+ 
     <div class="line"></div>
     <footer>
         <div class="container">
